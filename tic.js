@@ -1,6 +1,8 @@
 
 var flag=1;
 var flag2=1;
+var gc=0;
+
 function rules(){
     console.log("Called")
     const obj = document.getElementById("ins");
@@ -15,7 +17,6 @@ function rules(){
 }
 
 const win_conditions = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
-
 function check(){
     for(var i=0;i<win_conditions.length;i++){
         var count=0;
@@ -34,9 +35,11 @@ function check(){
             else{
                 alert("Player O won!");
             }
+            return 1;
         }
 
     }
+    return 0;
 }
 
 function myfunc(event){
@@ -44,7 +47,7 @@ function myfunc(event){
         alert("Already occupied cells cannot be changed!");
         return;
     }
-
+    gc++;
     if(flag2){
         document.getElementById(event.target.id).value="X";
         console.log("xx");
@@ -53,7 +56,11 @@ function myfunc(event){
         document.getElementById(event.target.id).value="O";
     }
     flag2=1-flag2;
-    check();
+    var temp = check();
+    if(!temp && gc==9){
+        alert("Draw!");
+        myfunc_2();
+    }
 }
 
 
@@ -63,4 +70,5 @@ function myfunc_2(){
     }
     flag2=1;
     flag=1;
+    gc=0;
 }
