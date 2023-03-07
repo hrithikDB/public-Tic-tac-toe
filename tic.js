@@ -2,6 +2,9 @@
 var flag=1;
 var flag2=1;
 var gc=0;
+var flag3=1;
+var count1=0;
+var count2=0;
 
 function rules(){
     console.log("Called")
@@ -39,6 +42,7 @@ function check(){
         }
 
     }
+
     return 0;
 }
 
@@ -57,6 +61,15 @@ function myfunc(event){
     }
     flag2=1-flag2;
     var temp = check();
+    if(temp){
+        if(flag2){
+            count2++;
+        }
+        else{
+            count1++;
+        }
+    }
+    upd();
     if(!temp && gc==9){
         alert("Draw!");
         myfunc_2();
@@ -71,4 +84,30 @@ function myfunc_2(){
     flag2=1;
     flag=1;
     gc=0;
+}
+
+function display(){
+    const obj = document.getElementById("dis");
+    if(flag3){
+        obj.innerHTML = `Player-1 score - ${count1} <br> Player-2 score - ${count2}`;
+    }
+    else{
+        obj.innerHTML = "";
+    }
+    flag3=1-flag3;
+
+}
+
+function upd(){
+    const obj = document.getElementById("dis");
+    if(!flag3){
+        obj.innerHTML = `Player-1 score - ${count1} <br> Player-2 score - ${count2}`;
+    }
+}
+
+function resetscores(){
+    alert("Looks Like someone's losingg")
+    count1=0;
+    count2=0;
+    upd();
 }
