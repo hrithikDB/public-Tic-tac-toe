@@ -60,20 +60,23 @@ function myfunc(event){
         document.getElementById(event.target.id).value="O";
     }
     flag2=1-flag2;
-    var temp = check();
-    if(temp){
-        if(flag2){
-            count2++;
+    setTimeout(() => {
+        var temp = check();
+        if(temp){
+            if(flag2){
+                count2++;
+            }
+            else{
+                count1++;
+            }
         }
-        else{
-            count1++;
+        upd();
+        if(!temp && gc==9){
+            alert("Draw!");
+            myfunc_2();
         }
-    }
-    upd();
-    if(!temp && gc==9){
-        alert("Draw!");
-        myfunc_2();
-    }
+    },1);
+    
 }
 
 
